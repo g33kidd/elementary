@@ -1,0 +1,14 @@
+{
+  "name": "cms",
+  "version": "0.0.1",
+  "description": "Just a CMS written in ES6 with NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Kidd",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23"
+  }
+}
