@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "nunjucks": "^2.1.0",
-    "underscores": "0.0.1"
+    "underscore": "^1.8.3"
   }
 }
