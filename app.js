@@ -3,18 +3,38 @@ var http = require('http');
 
 // var template = new nunjucks.Template('Hello, {{ username | replace("g33kidd", "NEWUSERNAME")}}!');
 // console.log(template.render({username: "g33kidd"}));
-class Router {
-  constructor() {
-    this.routes = {get: [], post: []};
+
+class Route {
+  constructor(name, path, callback) {
+    this.name = name;
+    this.path = path;
+    this.callback = callback;
   }
 
-  get(path, options) {
+  get name() { return this.name; }
+  get path() { return this.path }
+
+  handleRequest() {
+    this.callback();
+  }
+}
+
+class Router {
+  constructor() {
+    this.routes = [];
+  }
+
+  get(name, options) {
     // this.routes.get.push({ path, callback });
   }
 
   post(path, options) {
     // let newRoute = {path, callback};
     // this.routes.post.push({ path, callback });
+  }
+
+  _newRoute(params) {
+
   }
 }
 
