@@ -12,17 +12,17 @@ var router = new Router();
 
 // provide params, route, callback, and other stuff by merging params?
 
+router.route('routeName', {
+  path: '/',
+  action: (request, response) => {
+    console.log(request);
+    response.end();
+  }
+});
+
+router.findRoute('routeName');
+
 var RequestListener = (req, res) => {};
 http.createServer(RequestListener).listen(3000, () => {
   console.log("[[[ "+ __dirname +" ]]]\n\nNow listening on: http://localhost:3000");
-
-  router.route('routeName', {
-    path: '/',
-    action: (request, response) => {
-      console.log(request);
-      response.end();
-    }
-  });
-
-  console.log(router.routes);
 });

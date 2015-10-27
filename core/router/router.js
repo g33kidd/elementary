@@ -8,6 +8,10 @@ export class Router {
 
   route(name, options) {
     let newRoute = new Route(name, options.path, options.action);
+    // TODO: Validation
+    // if(_validateRoute(newRoute)) {
+    //   this.routes.push(newRoute);
+    // }
     this.routes.push(newRoute);
     return newRoute;
   }
@@ -29,12 +33,8 @@ export class Router {
   }
 
   findRoute(name) {
-    _.find(this.routes, (route) => {
-      if(route.name === name) {
-        return route;
-      }else{
-        return false;
-      }
+    _.each(this.routes, (route) => {
+      console.log(route.name);
     });
   }
 }
