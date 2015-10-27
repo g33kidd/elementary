@@ -12,6 +12,7 @@
     "babel": "^5.8.23"
   },
   "dependencies": {
-    "nunjucks": "^2.1.0"
+    "nunjucks": "^2.1.0",
+    "underscores": "0.0.1"
   }
 }

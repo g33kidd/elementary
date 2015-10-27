@@ -8,24 +8,32 @@ class Router {
     this.routes = {get: [], post: []};
   }
 
-  get(path) {
-    this.routes.get.push(path);
+  get(path, options) {
+    // this.routes.get.push({ path, callback });
   }
 
-  post(path) {
-    this.routes.post.push(path);
+  post(path, options) {
+    // let newRoute = {path, callback};
+    // this.routes.post.push({ path, callback });
   }
 }
 
 var router = new Router();
-router.get('/test/:postid');
-console.log(router.routes);
 
-var RequestListener = (req, res) => {
-  console.log(req);
-  res.end();
-};
+// Only provide the route and callback, nothing else.
+// router.get('/test/:postid', () => console.log("test"));
 
+// provide params, route, callback, and other stuff by merging params?
+router.get('routeName', {
+  path: '/',
+  actionGet: (response) => {
+    response.end();
+  }
+});
+
+console.log(router.listRoutes);
+
+var RequestListener = (req, res) => {};
 http.createServer(RequestListener).listen(3000, () => {
   console.log("[[[ "+ __dirname +" ]]]\n\nNow listening on: http://localhost:3000");
 });
