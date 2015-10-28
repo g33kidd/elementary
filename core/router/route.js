@@ -15,6 +15,6 @@ export class Route {
   set action(action) { this._action = action; }
 
   handleRequest(request, response) {
-    this._action(req, res);
+    this._action(request, response);
   }
 }

@@ -12,15 +12,49 @@ var router = new Router();
 
 // provide params, route, callback, and other stuff by merging params?
 
-router.route('routeName', {
+
+// router.route('routeName', {
+//   path: '/',
+//   action(request, response) {
+//     console.log(request.url);
+//     response.end();
+//   }
+// });
+
+
+// Should result in an error?
+// router.route('routeName', {
+//   path: '/',
+//   action(request, response) {
+//     console.log(request.url);
+//     response.end();
+//   }
+// });
+
+router.route('home', {
   path: '/',
-  action: (request, response) => {
-    console.log(request);
+  action(request, response) {
+    console.log(request.url);
     response.end();
   }
 });
 
-router.findRoute('routeName');
+console.log(router.listRoutes());
+
+// Maybe good idea to have different request type methods as well
+// router.route('routeName', {
+//   path: '/',
+//
+//   actionGet(response) {
+//     response.end();
+//   },
+//   actionPost(response) {
+//     response.end();
+//   },
+//   actionDelete(response) {
+//     response.end();
+//   }
+// });
 
 var RequestListener = (req, res) => {};
 http.createServer(RequestListener).listen(3000, () => {
