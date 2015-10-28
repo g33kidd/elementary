@@ -1,12 +1,29 @@
-import path from 'path'
-import { App as app } from './core'
+import _ from 'underscore'
+import http from 'http'
 
-// app.configure({
-//   port: 3000,
-//   contentDir: path.resolve(__dirname, 'content'),
-//   useFixtures: false,
-//   // More config options for server, app here
-// });
+class Router {
+  constructor() { this.routes = []; }
+  route(name, path, action) { this.routes.push({name, path, action}); }
+}
 
-app.init();
-app.start();
+var requestListener = (req, res) => {
+  // console.log(req.url.params);
+  res.statusCode = 200;
+  res.writeHeader({"Content-Type": "text/html"});
+  res.write("<h1>Some Test Content</h1>");
+  res.end();
+};
+
+let App = {
+  Router: new Router(),
+  httpServer: http.createServer(requestListener),
+  start() {
+    this.httpServer.listen(3000, () => console.log("listening on localhost:3000"))
+  }
+};
+
+App.Router.route('name', '/', function() {
+  console.log("test");
+});
+
+App.start();

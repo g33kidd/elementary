@@ -1,4 +1,4 @@
-var _ = require('underscore');
+import _ from 'underscore'
 import { Route } from './route.js'
 
 // Usage:
@@ -30,13 +30,13 @@ export class Router {
 
   // Creates a new route
   route(name, options) {
-    let newRoute = new Route(name, options.path, options.action);
-    if(this.validateRoute(newRoute)) {
-      this.routes.push(newRoute);
+    let route = new Route(name, options.path, options.action);
+    if(this.validateRoute(route)) {
+      this.routes.push(route);
+      return route;
     }else{
-      throw new Error(`Route is Invalid`);
+      throw new Error("Route is Invalid");
     }
-    return newRoute;
   }
 
   listRoutes() { return this.routes; }
