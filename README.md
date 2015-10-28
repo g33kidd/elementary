@@ -3,4 +3,5 @@
 Just a CMS I'm building to improve my Javascript and NodeJS skills.
 
 #### Some Notes:
-- Please run with `babel-node app.js`
+- Run `nodemon --exec babel-node app.js`
+- Build tools coming soon

@@ -21,12 +21,14 @@ import { Route } from './route.js'
 // actionDelete         : DELETE Request
 //
 // TODO: Improve comments and Documentation
+// TODO: Add reserved words for the name of the route, and reserved paths?
 
 export class Router {
   constructor() {
     this.routes = [];
   }
 
+  // Creates a new route
   route(name, options) {
     let newRoute = new Route(name, options.path, options.action);
     if(this.validateRoute(newRoute)) {
@@ -39,8 +41,8 @@ export class Router {
 
   listRoutes() { return this.routes; }
 
+  // Validates a route, by checking name and path
   validateRoute(route) {
-    // TODO: make sure that routes dont override core routes. reserved words.
     if(this.findRoute(route.name) || this.findRoute(route.path)) {
       return false;
     }else{
@@ -56,10 +58,8 @@ export class Router {
   findRoute(param) {
     return _.find(this.routes, (route) => {
       if(route.name === param || route.path === param) {
-        // the route already exists
         return true;
       }else{
-        // no route uses the same name or path
         return false;
       }
     });
@@ -73,7 +73,7 @@ export class Router {
 
   requestHandler(req, res) {
     let route = this.getRoute(req.url);
-    route.handleRequest(req, res);
-    console.log(route);
+    route.handleRequest(req, res)
+         .then(res.end());
   }
 }
