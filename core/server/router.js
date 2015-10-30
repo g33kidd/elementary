@@ -1,3 +1,5 @@
+const debug = require('debug');
+
 import _ from 'underscore'
 import { Route } from './route.js'
 
