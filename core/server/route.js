@@ -17,4 +17,8 @@ export class Route {
 
   // no getter because we don't want anyone to modify the action
   set action(action) { this._action = action; }
+
+  handleRequest(req, res) {
+    this._action(req, res);
+  }
 }

@@ -1,4 +1,4 @@
-const debug = require('debug');
+const debug = require('debug')('cms:router');
 
 import _ from 'underscore'
 import { Route } from './route.js'
@@ -17,16 +17,12 @@ import { Route } from './route.js'
 // TODO: Add shorthand route method
 // router.route('routeName', 'routePath', callback)
 //
-// TODO: Add request types for action methods
-// actionGet or action  : GET Request
-// actionPost           : POST Request
-// actionDelete         : DELETE Request
-//
 // TODO: Improve comments and Documentation
 // TODO: Add reserved words for the name of the route, and reserved paths?
 
 export class Router {
   constructor() {
+    debug('constructor');
     this.routes = [];
   }
 
@@ -34,6 +30,7 @@ export class Router {
   route(verb, name, options) {
     let route = new Route(name, options.path, options.action, verb);
     if(this.validateRoute(route)) {
+      debug(`added route '${name}'`);
       this.routes.push(route);
       return route;
     }else{
@@ -73,10 +70,17 @@ export class Router {
     }
   }
 
-  requestHandler(req, res) {
+  handleRequest(req, res) {
+    let method = req.method;
     let route = this.getRoute(req.url);
-
-    route.handleRequest(req, res)
-         .then(res.end());
+    if('undefined' != typeof route) {
+      route.handleRequest(req, res);
+    }else{
+      // TODO: Render view for 404 page
+      // not found, send this to themes/{activeTheme}/404.html
+      res.statusCode = 404;
+    }
+    res.end();
   }
+
 }
