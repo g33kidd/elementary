@@ -29,8 +29,8 @@ export class Router {
   }
 
   // Creates a new route
-  route(name, options) {
-    let route = new Route(name, options.path, options.action);
+  route(verb, name, options) {
+    let route = new Route(name, options.path, options.action, verb);
     if(this.validateRoute(route)) {
       this.routes.push(route);
       return route;
@@ -73,6 +73,7 @@ export class Router {
 
   requestHandler(req, res) {
     let route = this.getRoute(req.url);
+
     route.handleRequest(req, res)
          .then(res.end());
   }
