@@ -19,7 +19,5 @@ export default (options) => {
   // TODO: Add middleware inclusion from /middleware
   admin.init(server);
 
-  debug(server.get('test test'));
-
   server.start();
 }

@@ -83,8 +83,7 @@ export var Server = {
       if(typeof this.store[key] != 'undefined') {
         return this.store[key];
       }else{
-        debug(`could not get param "${key}"`);
-        throw new Error("Key does not exist");
+        throw new Error(`key "${key}" does not exist`);
       }
     }else{
       return this.store;

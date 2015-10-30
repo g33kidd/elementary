@@ -15,13 +15,12 @@ export var admin = {
       action: this.renderAdmin
     })
 
-    // We can set server/env variables now.
-    env.set('test test', 'TEST TEST TEST');
   },
 
   renderAdmin(req, res) {
-    debug('render admin');
-    console.log("test");
+    // res.render();
+    // 
+    // view.render(path, params);
   }
 
 }
