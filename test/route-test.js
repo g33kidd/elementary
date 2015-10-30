@@ -1,10 +1,10 @@
-var chai = require('chai');
-var expect = chai.expect;
-var should = chai.should();
+const chai = require('chai');
+const expect = chai.expect;
+const should = chai.should();
 
 describe('test', () => {
   it('should be ok', () => {
-    var foo = 'test';
+    const foo = 'test';
     expect(foo).to.be.a('string');
   });
 });
