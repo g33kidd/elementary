@@ -6,14 +6,12 @@ export var Server = {
   _port: null,
   _httpServer: null,
   router: null,
-  store: {},
 
   /**
    * start()
    * Starts the httpServer on the default port
    */
   start() {
-    debug();
     this._port = process.env.CMS_PORT || 3000;
     this._httpServer.listen(this._port, () => {
       debug(`Listening on port ${this._port}`);
@@ -71,36 +69,5 @@ export var Server = {
   callback(req, res) {
     debug(`request ${req.url}`);
     this.router.handleRequest(this, req, res);
-  },
-
-  /**
-   * get(param)
-   * Gets an item in the environment key/value store.
-   *
-   * NOTE: Only stores in memory, maybe implement redis or database storage?
-   * NOTE: This key/val store is only useful for core modules
-   */
-  get(key) {
-    if(key != null) {
-      if(typeof this.store[key] != 'undefined') {
-        return this.store[key];
-      }else{
-        throw new Error(`key "${key}" does not exist`);
-      }
-    }else{
-      return this.store;
-    }
-  },
-
-  /**
-   * set(param)
-   * Sets a value in the env key/value store.
-   */
-  set(key, val) {
-    if(key != null && val != null) {
-      this.store[key] = val;
-    }else{
-      throw new Error("Cannot set key/value without key and value");
-    }
   }
 }

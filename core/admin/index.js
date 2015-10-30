@@ -1,4 +1,5 @@
 const debug = require('debug')('cms:admin');
+const storage = require('../storage');
 
 export var admin = {
 
@@ -9,7 +10,7 @@ export var admin = {
     debug('init');
 
     let router = env.router;
-    debug(env.get('content path'));
+    debug(storage.get('content path'));
     router.route('get', 'default', {
       path: '/',
       action: this.renderAdmin
