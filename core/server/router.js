@@ -2,6 +2,8 @@ const debug = require('debug')('cms:router');
 
 import _ from 'underscore'
 import { Route } from './route.js'
+import { Request as Req } from './request.js'
+import { Response as Res } from './response.js'
 
 // Usage:
 // var router = new Router();
@@ -70,11 +72,18 @@ export class Router {
     }
   }
 
-  handleRequest(req, res) {
+  // TODO: move all response methods from here to ./response.js
+  handleRequest(env, req, res) {
     let method = req.method;
     let route = this.getRoute(req.url);
+
+    // let request = new Req();
+    // Create the request and set the ServerResponse
+    let response = new Res();
+    response.create(env, res);
+
     if('undefined' != typeof route) {
-      route.handleRequest(req, res);
+      route.handleRequest(req, response);
     }else{
       // TODO: Render view for 404 page
       // not found, send this to themes/{activeTheme}/404.html

@@ -14,13 +14,11 @@ export var admin = {
       path: '/',
       action: this.renderAdmin
     })
-
   },
 
   renderAdmin(req, res) {
-    // res.render();
-    // 
-    // view.render(path, params);
+    res.render('admin', {
+      site_name: "Admin"
+    });
   }
-
 }

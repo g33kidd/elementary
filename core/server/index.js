@@ -3,7 +3,7 @@ const debug = require('debug')('cms:server');
 import { Router } from './router'
 
 export var Server = {
-  _port: 3000,
+  _port: null,
   _httpServer: null,
   router: null,
   store: {},
@@ -13,9 +13,11 @@ export var Server = {
    * Starts the httpServer on the default port
    */
   start() {
+    debug();
+    this._port = process.env.CMS_PORT || 3000;
     this._httpServer.listen(this._port, () => {
-      debug('listening');
-      console.log("Listening on localhost:", this._port);
+      debug(`Listening on port ${this._port}`);
+      console.log(`Listening on http://localhost:${this._port}`);
     })
   },
 
@@ -68,7 +70,7 @@ export var Server = {
    */
   callback(req, res) {
     debug(`request ${req.url}`);
-    this.router.handleRequest(req, res);
+    this.router.handleRequest(this, req, res);
   },
 
   /**
