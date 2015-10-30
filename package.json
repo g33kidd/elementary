@@ -4,8 +4,8 @@
   "description": "Just a CMS written in ES6 with NodeJS",
   "main": "init.js",
   "scripts": {
-    "start": "DEBUG=cms:* nodemon --exec babel-node app.js",
-    "test": "nodemon --exec ./node_modules/.bin/mocha --compilers js:babel/register"
+    "start": "sh ./bin/start.sh",
+    "test": "sh ./bin/test.sh"
   },
   "author": "Joshua Kidd",
   "license": "MIT",
