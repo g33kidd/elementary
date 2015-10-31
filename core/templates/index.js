@@ -3,16 +3,16 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 const fs = require('fs');
 const utils = require('../util').templateUtils;
+const storage = require('../storage');
 
 export default function renderTemplate(env, name, data) {
-  let template = utils.findTemplate('name');
 
   // let template = fs.statSync(
   //   path.resolve(env.get('theme path'), `${name}.html`)
   // );
 
 
-  let templatePath = path.resolve(env.get('theme path'), `${name}.html`);
+  let templatePath = path.resolve(storage.get('theme path'), `${name}.html`);
   // let templateText = fs.
   let templateData = {};
 
