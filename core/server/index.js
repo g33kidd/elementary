@@ -1,3 +1,4 @@
+const _ = require('underscore');
 const http = require('http');
 const debug = require('debug')('cms:server');
 
@@ -5,27 +6,36 @@ import { Request as Req } from './request.js'
 import { Response as Res } from './response.js'
 import { Router } from './router'
 
-
 // TODO: might need to add a NunjucksEnv here
 // https://mozilla.github.io/nunjucks/api.html#precompile
 
 export var Server = {
-  _port: null,
-  _httpServer: null,
+  // _httpserver
+  // _port
+  // _router
   _coreMiddleware: [],
   _extMiddleare: [],
-  router: null,
 
   /**
    * start()
    * Starts the httpServer on the default port
+   *
+   * TODO: Create a default router
+   * NOTE: should it throw an error or just create them automatically?
    */
   start() {
     this._port = process.env.CMS_PORT || 3000;
-    this._httpServer.listen(this._port, () => {
-      debug(`Listening on port ${this._port}`);
-      console.log(`Listening on http://localhost:${this._port}`);
-    })
+    if('undefined' == typeof this._router) {
+      this.set('router', new Router());
+    }
+
+    if('undefined' == typeof this._httpserver) {
+      this.set('httpserver', http.createServer(this.callback.bind(this)));
+    }
+
+    this._httpserver.listen(this._port, () => {
+      debug('listening');
+    });
   },
 
   /**
@@ -33,8 +43,8 @@ export var Server = {
    * Get the current router if it exists
    */
   getRouter() {
-    if(this.router != null) {
-      return this.router;
+    if(this._router != null) {
+      return this._router;
     }else{
       return false;
     }
@@ -80,30 +90,29 @@ export var Server = {
     }
   },
 
-  // set(type, obj) {
-  //   let allowedTypes = ['router', 'server', 'db'];
-  // },
+  set(type, obj) {
+    let allowedTypes = ['router', 'httpserver', 'db'];
+    // let objName = obj.constructor.name.toLowerCase();
+    let isAllowed = _.find(allowedTypes, (t) => {
+      return t === type;
+    });
 
-  /**
-   * setRouter(new Router())
-   * Attaches a router object to the server environment.
-   *
-   * TODO: Allow for multiple routers or groups to be created.
-   */
-  setRouter(router) {
-    if(!router) {
-      debug('router set');
-      this.router = new Router();
+    if(isAllowed) {
+      debug(`added prop "_${type}"`);
+      this[`_${type}`] = obj;
+      return;
     }else{
-      if('object' == typeof router) {
-        this.router = router;
-      }else{
-        throw new TypeError("Cannot set non-object as Router.");
-      }
+      throw new Error(`Could not attach ${type} to Server`);
     }
   },
 
-  use() {},
+  get(type) {
+    if('undefined' != typeof this[`_${type}`]) {
+      return this[`_${type}`];
+    }else{
+      throw new Error(`${type} does not exist in the environment`);
+    }
+  },
 
   /**
    * callback
@@ -120,6 +129,6 @@ export var Server = {
     response.init(res);
 
     // ...
-    this.router.handleRequest(request, response);
+    this.get('router').handleRequest(request, response);
   }
 }

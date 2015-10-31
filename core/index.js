@@ -32,8 +32,20 @@ export default (options) => {
   // });
   // server.setRouter(route);
 
-  server.setHttpServer();
-  server.setRouter();
+  // server.setHttpServer();
+  // server.setRouter();
+
+  // var router = new Router();
+  // server.set('router', router);
+  //
+  // admin.init(server);
+  // middleware.attach(server);
+  //
+  // server.start();
+  //
+  var router = new Router();
+
+  server.set('router', router);
 
   admin.init(server);
   middleware.attach(server);
