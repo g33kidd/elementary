@@ -2,8 +2,10 @@ const debug = require('debug')('cms:core');
 const _     = require('underscore');
 const storage = require('./storage');
 
+
 import { Server } from './server'
 import { admin } from './admin'
+import { middleware } from './middleware'
 import { Router } from './server/router'
 
 var server = Server;
@@ -18,19 +20,23 @@ export default (options) => {
     debug('set default storage values');
   })
 
-  var router = new Router();
-
-  router.route('get', 'default', {
-    path: '/',
-    action(req, res) {
-      // debug("FRreaking works");
-    }
-  });
+  // NOTE: We could do this, but only if it were a custom Router
+  // or to add a different type of router.
+  //
+  // var router = new Router();
+  // router.route('get', 'default', {
+  //   path: '/',
+  //   action(req, res) {
+  //     debug("FRreaking works");
+  //   }
+  // });
+  // server.setRouter(route);
 
   server.setHttpServer();
-  server.setRouter(router);
+  server.setRouter();
 
   admin.init(server);
+  middleware.attach(server);
 
   server.start();
 }

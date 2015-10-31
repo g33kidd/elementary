@@ -10,10 +10,8 @@ export var admin = {
    * @param env  Server
    */
   init(env) {
-    debug('init');
-
-    debug(storage.get('content path'));
-    env.router.route('get', 'adminIndex', {
+    let router = env.getRouter();
+    router.route('get', 'adminIndex', {
       path: '/admin',
       action: this.renderAdmin
     })

@@ -26,6 +26,14 @@ export class Router {
     this.routes = [];
   }
 
+  /**
+   * group('groupName', (router) => {})
+   * TODO: Implement this type of routing
+   */
+  group(name, callback) {
+
+  }
+
   // Creates a new route
   route(verb, name, options) {
     // TODO: Improve route validation

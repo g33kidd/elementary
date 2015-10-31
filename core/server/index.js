@@ -12,6 +12,8 @@ import { Router } from './router'
 export var Server = {
   _port: null,
   _httpServer: null,
+  _coreMiddleware: [],
+  _extMiddleare: [],
   router: null,
 
   /**
@@ -24,6 +26,37 @@ export var Server = {
       debug(`Listening on port ${this._port}`);
       console.log(`Listening on http://localhost:${this._port}`);
     })
+  },
+
+  /**
+   * getRouter()
+   * Get the current router if it exists
+   */
+  getRouter() {
+    if(this.router != null) {
+      return this.router;
+    }else{
+      return false;
+    }
+  },
+
+  /**
+   * use(event, action)
+   * Could be useful for running middleware on different events.
+   * Routes, even...
+   *
+   * Usage:
+   *
+   * server.use('on request', (req, res) => {
+   *   if(!authenticated) {
+   * 	 	 res.render('restricted', {data: data});
+   * 	 }
+   * });
+   */
+  use(event, action) {
+    if(typeof action != 'function') {
+      debug('')
+    }
   },
 
   /**
@@ -47,6 +80,10 @@ export var Server = {
     }
   },
 
+  // set(type, obj) {
+  //   let allowedTypes = ['router', 'server', 'db'];
+  // },
+
   /**
    * setRouter(new Router())
    * Attaches a router object to the server environment.
@@ -65,6 +102,8 @@ export var Server = {
       }
     }
   },
+
+  use() {},
 
   /**
    * callback
