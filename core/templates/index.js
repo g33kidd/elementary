@@ -37,21 +37,4 @@ export default function renderTemplate(name, data) {
   }else{
     throw new Error(`Could not find Template with the name: ${name}`);
   }
-
-
-  // let templatePath = path.resolve(storage.get('theme path'), `${name}.html`);
-  // // let templateText = fs.
-  // let templateData = {};
-  //
-  // if('object' == typeof data) {
-  //   Object.assign(templateData, data);
-  // }
-  //
-  // // TODO: Do we have access to this location if it exists?
-  // // fs.access(path[, mode], callback)
-  //
-  // if(template) {
-  //   let compiled = nunjucks.compile();
-  //   debug('template found');
-  // }
 }

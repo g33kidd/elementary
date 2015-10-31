@@ -5,6 +5,10 @@ import { Request as Req } from './request.js'
 import { Response as Res } from './response.js'
 import { Router } from './router'
 
+
+// TODO: might need to add a NunjucksEnv here
+// https://mozilla.github.io/nunjucks/api.html#precompile
+
 export var Server = {
   _port: null,
   _httpServer: null,
