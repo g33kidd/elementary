@@ -1,5 +1,8 @@
 const http = require('http');
 const debug = require('debug')('cms:server');
+
+import { Request as Req } from './request.js'
+import { Response as Res } from './response.js'
 import { Router } from './router'
 
 export var Server = {
@@ -67,7 +70,13 @@ export var Server = {
    * TODO: Add support for middleware to go through this callback phase.
    */
   callback(req, res) {
-    debug(`request ${req.url}`);
-    this.router.handleRequest(this, req, res);
+    let request = new Req();
+    let response = new Res();
+
+    request.init(req);
+    response.init(res);
+
+    // ...
+    this.router.handleRequest(request, response);
   }
 }

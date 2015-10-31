@@ -4,6 +4,7 @@ const storage = require('./storage');
 
 import { Server } from './server'
 import { admin } from './admin'
+import { Router } from './server/router'
 
 var server = Server;
 
@@ -17,8 +18,17 @@ export default (options) => {
     debug('set default storage values');
   })
 
+  var router = new Router();
+
+  router.route('get', 'default', {
+    path: '/',
+    action(req, res) {
+      // debug("FRreaking works");
+    }
+  });
+
   server.setHttpServer();
-  server.setRouter();
+  server.setRouter(router);
 
   admin.init(server);
 

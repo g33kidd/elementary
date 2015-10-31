@@ -1,7 +1,20 @@
-import { IncomingMessage } from 'http'
+const debug = require('debug')('cms:response');
+// const storage = require('../storage');
 
-export default class Request extends IncomingMessage {
+import renderTemplate from '../templates'
+
+import { IncomingMessage } from 'http'
+export class Request {
   constructor() {
-    super()
+    debug('request');
+    this._incomingMessage = null;
+  }
+
+  init(req) {
+    if('object' == typeof req) {
+      this._incomingMessage = req;
+    }else{
+      throw new TypeError('Could not set non-object as request.');
+    }
   }
 }

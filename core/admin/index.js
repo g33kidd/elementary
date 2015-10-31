@@ -9,17 +9,17 @@ export var admin = {
   init(env) {
     debug('init');
 
-    let router = env.router;
     debug(storage.get('content path'));
-    router.route('get', 'default', {
-      path: '/',
-      action: this.renderAdmin
+    env.router.route('get', 'adminIndex', {
+      path: '/admin',
+      action: this.renderAdmin.bind(this)
     })
   },
 
   renderAdmin(req, res) {
-    res.render('admin', {
-      site_name: "Admin"
-    });
+    // Render template with data.
+    // TODO: Write alternate method to allow optional callback or use promise.
+    let templateData = { sitename: "Administration" };
+    res.render('admin', templateData);
   }
 }

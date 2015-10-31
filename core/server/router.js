@@ -2,8 +2,6 @@ const debug = require('debug')('cms:router');
 
 import _ from 'underscore'
 import { Route } from './route.js'
-import { Request as Req } from './request.js'
-import { Response as Res } from './response.js'
 
 // Usage:
 // var router = new Router();
@@ -22,14 +20,19 @@ import { Response as Res } from './response.js'
 // TODO: Improve comments and Documentation
 // TODO: Add reserved words for the name of the route, and reserved paths?
 
+// TODO: Add support for get, post, del, etc...
 export class Router {
   constructor() {
-    debug('constructor');
     this.routes = [];
   }
 
   // Creates a new route
   route(verb, name, options) {
+    // TODO: Improve route validation
+    if(verb == '' || name == '') { throw new Error("Could not create route."); }
+
+    // let route = new Route(name, options.path, options.action, verb);
+
     let route = new Route(name, options.path, options.action, verb);
     if(this.validateRoute(route)) {
       debug(`added route '${name}'`);
@@ -38,6 +41,8 @@ export class Router {
     }else{
       throw new Error("Route is Invalid");
     }
+
+    debug(this.routes);
   }
 
   listRoutes() { return this.routes; }
@@ -72,24 +77,29 @@ export class Router {
     }
   }
 
-  // TODO: move all response methods from here to ./response.js
-  handleRequest(env, req, res) {
-    let method = req.method;
-    let route = this.getRoute(req.url);
-
-    // let request = new Req();
-    // Create the request and set the ServerResponse
-    let response = new Res();
-    response.create(env, res);
+  handleRequest(req, res) {
+    // let method = req.method;
+    // debug(req.);
+    let method = req._incomingMessage.method;
+    let route = this.getRoute(req._incomingMessage.url);
 
     if('undefined' != typeof route) {
-      route.handleRequest(req, response);
+      route.handleRequest(req, res);
     }else{
-      // TODO: Render view for 404 page
-      // not found, send this to themes/{activeTheme}/404.html
-      res.statusCode = 404;
+      res.send(404);
     }
-    res.end();
+
+
+    // let route = this.getRoute(req.url);
+
+    // if('undefined' != typeof route) {
+    //   route.handleRequest(req, res);
+    // }else{
+    //   // TODO: Render view for 404 page
+    //   // not found, send this to themes/{activeTheme}/404.html
+    //   debug('404 error');
+    //   res.send(404);
+    // }
   }
 
 }

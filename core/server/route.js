@@ -19,6 +19,9 @@ export class Route {
   set action(action) { this._action = action; }
 
   handleRequest(req, res) {
+    // return new Promise((resolve, reject) => {
     this._action(req, res);
+    // });
+    // this._action(req, res);
   }
 }
