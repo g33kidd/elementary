@@ -62,12 +62,10 @@ export var Server = {
    * 	 	 res.render('restricted', {data: data});
    * 	 }
    * });
+   *
+   * TODO: implement this
    */
-  use(event, action) {
-    if(typeof action != 'function') {
-      debug('')
-    }
-  },
+  use(event, action) {},
 
   /**
    * setHttpServer(new http.Server())
@@ -90,6 +88,10 @@ export var Server = {
     }
   },
 
+  /**
+   * set()
+   * sets the object and attaches it to the server
+   */
   set(type, obj) {
     let allowedTypes = ['router', 'httpserver', 'db'];
     // let objName = obj.constructor.name.toLowerCase();
@@ -106,6 +108,10 @@ export var Server = {
     }
   },
 
+  /**
+   * get()
+   * gets the object from the server
+   */
   get(type) {
     if('undefined' != typeof this[`_${type}`]) {
       return this[`_${type}`];
