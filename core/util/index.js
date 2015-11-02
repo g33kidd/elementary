@@ -1,7 +1,15 @@
-export var templateUtils = {
+export default {
 
-  findTemplate(name) {
-    console.log("");
-    // if()
-  }
+  getContentPath() {
+
+  },
+
+  findTemplateFile() {
+
+  },
+
+  getTemplateFile() {
+
+  },
+
 };

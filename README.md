@@ -1,10 +1,6 @@
 ## CMS
 
-Just a CMS I'm building to improve my Javascript and NodeJS skills.
-
 ### How to Use?
-
-Currently, a lot of the code is a concept. It is definitely **not** production ready until a version 1.0.0 has been reached.
 
 This project is in development.
 

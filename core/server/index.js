@@ -8,6 +8,11 @@ import { Router } from './router'
 
 // TODO: might need to add a NunjucksEnv here
 // https://mozilla.github.io/nunjucks/api.html#precompile
+// TODO: implement http2?
+
+
+
+
 
 export var Server = {
   // _httpserver
@@ -35,6 +40,7 @@ export var Server = {
 
     this._httpserver.listen(this._port, () => {
       debug('listening');
+      console.log(`Listening on http://localhost:${this._port}`);
     });
   },
 
@@ -128,6 +134,9 @@ export var Server = {
    * TODO: Add support for middleware to go through this callback phase.
    */
   callback(req, res) {
+    debug(req.trailers);
+    debug(req.method);
+    debug(req.headers);
     let request = new Req();
     let response = new Res();
 
