@@ -86,8 +86,6 @@ export class Router {
   }
 
   handleRequest(req, res) {
-    // let method = req.method;
-    // debug(req.);
     let method = req._incomingMessage.method;
     let route = this.getRoute(req._incomingMessage.url);
 
@@ -96,18 +94,6 @@ export class Router {
     }else{
       res.send(404);
     }
-
-
-    // let route = this.getRoute(req.url);
-
-    // if('undefined' != typeof route) {
-    //   route.handleRequest(req, res);
-    // }else{
-    //   // TODO: Render view for 404 page
-    //   // not found, send this to themes/{activeTheme}/404.html
-    //   debug('404 error');
-    //   res.send(404);
-    // }
   }
 
 }

@@ -1,11 +1,4 @@
-## Server
+# Server
 
-### TODO
+The server module is basically just the HttpServer with a few additions like custom 
 
-- improve response time
-- improve the response API
-
-
-## Ideas
-
-Send events from the server to middleware

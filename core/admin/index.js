@@ -10,7 +10,7 @@ export var admin = {
    * @param env  Server
    */
   init(env) {
-    let router = env.getRouter();
+    let router = env.get('router');
     router.route('get', 'adminIndex', {
       path: '/admin',
       action: this.renderAdmin

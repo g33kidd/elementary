@@ -1,9 +1,3 @@
-## CMS
-
-### How to Use?
-
-This project is in development.
-
 ### Contributing
 - Fork the repository
 - Install Dependencies `npm install`

@@ -1,5 +1,6 @@
 const debug = require('debug')('cms:response');
-// const storage = require('../storage');
+const storage = require('../storage');
+const path = require('path');
 
 import renderTemplate from '../templates'
 
@@ -20,14 +21,20 @@ export class Response {
 
   // TODO: Validate the options
   render(name, data) {
-    let template = renderTemplate(name, data);
-    if(template) {
-      this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
-      this._serverResponse.write(template);
-      this.end();
-    }else{
-      throw new Error("Template could not be found.");
-    }
+    let templatePath = path.resolve(storage.get('admin path'), 'templates');
+    let template = renderTemplate(name, { templatePath });
+    this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
+    this._serverResponse.write(template);
+    this.end();
+    // this._serverResponse.wr
+    // let template = renderTemplate(name, data);
+    // if(template) {
+    //   this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
+    //   this._serverResponse.write(template);
+    //   this.end();
+    // }else{
+    //   throw new Error("Template could not be found.");
+    // }
   }
 
   // TODO: Add support for different content types

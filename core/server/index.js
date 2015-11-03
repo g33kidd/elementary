@@ -30,8 +30,10 @@ export var Server = {
    */
   start() {
     this._port = process.env.CMS_PORT || 3000;
+
     if('undefined' == typeof this._router) {
-      this.set('router', new Router());
+      let router = new Router();
+      this.set('router', router);
     }
 
     if('undefined' == typeof this._httpserver) {
@@ -119,11 +121,12 @@ export var Server = {
    * gets the object from the server
    */
   get(type) {
-    if('undefined' != typeof this[`_${type}`]) {
-      return this[`_${type}`];
-    }else{
-      throw new Error(`${type} does not exist in the environment`);
-    }
+    return this[`_${type}`];
+    // if('undefined' != typeof this[`_${type}`]) {
+      // return this[`_${type}`];
+    // }else{
+    //   throw new Error(`${type} does not exist in the environment`);
+    // }
   },
 
   /**
@@ -137,6 +140,7 @@ export var Server = {
     debug(req.trailers);
     debug(req.method);
     debug(req.headers);
+    
     let request = new Req();
     let response = new Res();
 

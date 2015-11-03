@@ -9,13 +9,6 @@ const pluginPath = path.resolve(__dirname, 'content', 'plugins');
 const themePath = path.resolve(__dirname, 'content', 'themes');
 const uploadPath = path.resolve(__dirname, 'content', 'uploads');
 
-// Some ideas on how to load the server:
-// 
-// let application = require('./core');
-// application().then((server) => {
-// 	server.start();
-// });
-
 // Let's start the application
 (() => {
   require('./core')({
