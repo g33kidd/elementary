@@ -1,3 +1,5 @@
+'use strict';
+
 export class Route {
   constructor(name, path, action, verb) {
     this._name = name;

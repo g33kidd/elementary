@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:core');
 const _     = require('underscore');
 const storage = require('./storage');

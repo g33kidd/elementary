@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:app');
 const path = require('path');
 const http = require('http');
@@ -10,7 +12,7 @@ const themePath = path.resolve(__dirname, 'content', 'themes');
 const uploadPath = path.resolve(__dirname, 'content', 'uploads');
 
 // Some ideas on how to load the server:
-// 
+//
 // let application = require('./core');
 // application().then((server) => {
 // 	server.start();

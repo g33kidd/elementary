@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:templates');
 const nunjucks = require('nunjucks');
 const path = require('path');

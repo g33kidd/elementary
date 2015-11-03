@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:admin');
 const storage = require('../storage');
 
