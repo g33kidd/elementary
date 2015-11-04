@@ -27,6 +27,8 @@ export var Server = {
    *
    * TODO: Create a default router
    * NOTE: should it throw an error or just create them automatically?
+   *
+   * Need to fix this, can't use it without doing .set(), create init()?
    */
   start() {
     this._port = process.env.CMS_PORT || 3000;

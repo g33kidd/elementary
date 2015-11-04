@@ -22,6 +22,9 @@ export default (options) => {
   // set the admin path
   storage.set('admin path', path.resolve(__dirname, 'admin'))
   
-  admin.init(server);
-  server.start();
+  var router = new Router();
+  server.set('router', router);  
+
+  admin.init(server)
+  server.start()
 }

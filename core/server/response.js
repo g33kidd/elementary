@@ -22,7 +22,7 @@ export class Response {
   // TODO: Validate the options
   render(name, data) {
     let templatePath = path.resolve(storage.get('admin path'), 'templates');
-    let template = renderTemplate(name, { templatePath });
+    let template = renderTemplate(name, { templatePath, data });
     this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
     this._serverResponse.write(template);
     this.end();
