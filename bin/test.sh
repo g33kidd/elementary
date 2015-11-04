@@ -1,2 +1,2 @@
 #!/bin/sh
-nodemon --exec mocha --compilers js:babel/register
+nodemon --exec ./node_modules/.bin/mocha --compilers js:babel/register

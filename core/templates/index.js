@@ -10,6 +10,7 @@ const storage = require('../storage');
 
 // TODO: validation
 // TODO: get the current theme from the settings api
+// TODO: Move to EJS
 export default function renderTemplate(name, options, done) {
   let path = options.templatePath;
   let loader = new FileSystemLoader(path, { watch: true });

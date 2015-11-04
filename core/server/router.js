@@ -1,8 +1,8 @@
 'use strict';
 
+const _ = require('underscore');
 const debug = require('debug')('cms:router');
 
-import _ from 'underscore'
 import { Route } from './route.js'
 
 // Usage:

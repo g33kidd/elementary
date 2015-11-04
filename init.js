@@ -13,6 +13,7 @@ const uploadPath = path.resolve(__dirname, 'content', 'uploads');
 
 // Let's start the application
 (() => {
+  debug('starting');
   require('./core')({
     'content path': contentPath,
     'plugin path': pluginPath,
