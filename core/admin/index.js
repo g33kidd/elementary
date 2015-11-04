@@ -1,10 +1,8 @@
 'use strict';
 
-const debug = require('debug')('cms:admin');
 const storage = require('../storage');
 
-export default ({server, router}) => {
-
+function admin({server, router}) {
   router.route('admin', {
     path: '/admin',
     actionGet(req, res, done) {
@@ -12,25 +10,6 @@ export default ({server, router}) => {
       done();
     }
   })
-
 }
 
-// export var admin = {
-
-//   /**
-//    * init()
-//    * Initializes the admin server component.
-//    *
-//    * @param env  Server
-//    */
-//   init(env) {
-//     let router = env.get('router');
-//     router.route('adminIndex', {
-//       path: '/admin',
-//       actionGet(req, res) {
-//         let data = { sitename: "Admin" }
-//         res.render('index', data)
-//       }
-//     })
-//   }
-// }
+export default admin;

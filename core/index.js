@@ -10,29 +10,17 @@ var server = require('./server');
 var admin = require('./admin');
 var router = require('./server/router');
 
-export default (options) => {
-  process.NODE_ENV = process.NODE_ENV || 'development'
-  _.each(options, (val, key) => storage.set(key, val))
+function initCore(opts = {}) {
+  _.each(opts, (val, key) => storage.set(key, val))
 
-  // var router = {
-  //   _routes: [],
-  //   route(name) {
-  //     this._routes.push(name);
-  //   },
-  //   handle(req, res, done) {
-  //     // debug("request");
-  //     res.writeHead(200, {'Content-Type': 'text/html'});
-  //     res.write('<h1>Test</h1>');
-  //     done();
-  //   }
-  // }
+  // init the admin component
+  admin({server, router})
 
-  // create the admin
-  admin({ server, router })
-
-  // Add middleware
+  // add router as middleware
   server.add(router)
 
-  // Start the application
+  // start the server
   server.start()
 }
+
+export default { initCore };
