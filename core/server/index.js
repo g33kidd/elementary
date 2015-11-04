@@ -4,25 +4,12 @@ const _ = require('underscore');
 const http = require('http');
 const debug = require('debug')('cms:server');
 
-import { Request as Req } from './request.js'
-import { Response as Res } from './response.js'
-import { Router } from './router'
-
-// TODO: might need to add a NunjucksEnv here
-// https://mozilla.github.io/nunjucks/api.html#precompile
-// TODO: implement http2?
-
 export default {
   _middleware: [],
 
   /**
    * start()
    * Starts the httpServer on the default port
-   *
-   * TODO: Create a default router
-   * NOTE: should it throw an error or just create them automatically?
-   *
-   * Need to fix this, can't use it without doing .set(), create init()?
    */
   start() {
     this._port = process.env.CMS_PORT || 3000;
@@ -36,8 +23,6 @@ export default {
   /**
    * add
    * adds middleware to the server
-   *
-   * @param obj  the middleware object
    */
   add(obj) {
     if('object' == typeof obj) {
@@ -55,6 +40,7 @@ export default {
    * handle
    * handles running middleware
    *
+   * NOTE: what about routing? will running multiple after another effect the resp?
    */
   handle(req, res) {
     if(this._middleware.length > 0) {
@@ -66,6 +52,7 @@ export default {
       })
       res.end();
     }else{
+      throw new Error("No middleware found.");
       // TODO: render error page
     }
   }

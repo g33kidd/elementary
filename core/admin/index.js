@@ -3,8 +3,15 @@
 const debug = require('debug')('cms:admin');
 const storage = require('../storage');
 
-export default (options) => {
-  
+export default ({server, router}) => {
+
+  router.route('admin', {
+    path: '/admin',
+    actionGet(req, res) {
+      res.write('admin');
+    }
+  })
+
 }
 
 // export var admin = {
