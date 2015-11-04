@@ -1,3 +1,5 @@
+'use strict';
+
 const _ = require('underscore');
 const http = require('http');
 const debug = require('debug')('cms:server');

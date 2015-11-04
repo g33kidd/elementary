@@ -1,1 +1,3 @@
-// TODO: settings api
+'use strict';
+
+// TODO: Settings api

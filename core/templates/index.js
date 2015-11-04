@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:templates');
 const FileSystemLoader = require('nunjucks').FileSystemLoader;
 const Environment = require('nunjucks').Environment;
