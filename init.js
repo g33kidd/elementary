@@ -2,8 +2,6 @@
 
 const debug = require('debug')('cms:app');
 const path = require('path');
-const http = require('http');
-const _ = require('underscore');
 
 // Get the paths of the CMS content directory
 const contentPath = path.resolve(__dirname, 'content');
@@ -15,6 +13,7 @@ import { initCore as core } from './core'
 
 // Let's start the application
 (() => {
+
   debug('starting');
   process.NODE_ENV = process.NODE_ENV || 'development';
 

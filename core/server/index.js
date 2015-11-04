@@ -9,7 +9,7 @@ export default {
 
   /**
    * start()
-   * Starts the httpServer on the default port
+   * Starts the httpServer
    */
   start() {
     this._port = process.env.CMS_PORT || 3000;
@@ -53,7 +53,6 @@ export default {
       res.end();
     }else{
       throw new Error("No middleware found.");
-      // TODO: render error page
     }
   }
 
