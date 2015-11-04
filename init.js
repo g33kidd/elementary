@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:app');
 const path = require('path');
 const http = require('http');

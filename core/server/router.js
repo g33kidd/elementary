@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:router');
 
 import _ from 'underscore'

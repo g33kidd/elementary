@@ -1,3 +1,5 @@
+'use strict';
+
 const debug = require('debug')('cms:storage');
 const persist = require('node-persist');
 const util = require('../util');
