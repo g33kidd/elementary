@@ -10,6 +10,7 @@ import { Route } from './route.js'
 // TODO: Add reserved words for the name of the route, and reserved paths?
 // TODO: Add support for get, post, del, etc...
 
+// move to somewhere else? Utils maybe?
 _.mixin({
   capitalize: (string) => {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
@@ -28,6 +29,7 @@ var router = {
   // 
   // group(name, cb) {},
 
+  // TODO: add validation
   route(name, options) {
     let route = {}
 
@@ -38,9 +40,6 @@ var router = {
     }
 
     Object.assign(route, options);
-
-    debug(route);
-
     this._routes.push(route);
   },
 

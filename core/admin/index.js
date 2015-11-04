@@ -7,8 +7,9 @@ export default ({server, router}) => {
 
   router.route('admin', {
     path: '/admin',
-    actionGet(req, res) {
+    actionGet(req, res, done) {
       res.write('admin');
+      done();
     }
   })
 
