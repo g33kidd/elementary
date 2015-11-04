@@ -6,27 +6,37 @@ const storage = require('./storage');
 const path = require('path');
 const util = require('./util');
 
-import { Server } from './server'
-import { admin } from './admin'
-import { middleware } from './middleware'
-import { Router } from './server/router'
+var server = require('./server');
+var admin = require('./admin');
+// var router = require('./server/router');
 
-var server = Server;
+// import { admin } from './admin'
+// import { middleware } from './middleware'
+// import { Router } from './server/router'
+
 export default (options) => {
-
   process.NODE_ENV = process.NODE_ENV || 'development'
+  _.each(options, (val, key) => storage.set(key, val))
 
-  debug('starting')
-  _.each(options, (val, key) => {
-    storage.set(key, val)
-  })
+  var router = {
+    _routes: [],
+    route(name) {
+      this._routes.push(name);
+    },
+    handle(req, res, done) {
+      // debug("request");
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write('<h1>Test</h1>');
+      done();
+    }
+  }
 
-  // set the admin path
-  storage.set('admin path', path.resolve(__dirname, 'admin'))
-  
-  var router = new Router();
-  server.set('router', router);  
+  // Core components and middleware
+  admin({ server, router });
 
-  admin.init(server)
+  // Add middleware
+  server.add(router)
+
+  // Start the application
   server.start()
 }

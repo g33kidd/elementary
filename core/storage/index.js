@@ -24,14 +24,12 @@ const storage = persist.create({
 });
 
 export function get(key) {
-  debug('get');
   storage.initSync();
   storage.persistSync();
   return storage.getItemSync(key);
 }
 
 export function set(key, val) {
-  debug('set')
   storage.initSync();
   storage.setItemSync(key, val);
   storage.persistSync();
