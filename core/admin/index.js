@@ -13,25 +13,12 @@ export var admin = {
    */
   init(env) {
     let router = env.get('router');
-    router.route('get', 'adminIndex', {
+    router.route('adminIndex', {
       path: '/admin',
-      action: this.renderAdmin
+      actionGet(req, res) {
+        let data = { sitename: "Admin" }
+        res.render('index', data)
+      }
     })
-  },
-
-  // BEFORE/AFTER HOOKS or events?
-  // before<actionName> {
-  //   do something
-  // }
-
-  /**
-   * renderAdmin(req, res)
-   * Will be called by the route when it is requested.
-   */
-  renderAdmin(req, res) {
-    // Render template with data.
-    // TODO: Write alternate method to allow optional callback or use promise.
-    let templateData = { sitename: "Administration" };
-    res.render('admin', templateData);
   }
 }

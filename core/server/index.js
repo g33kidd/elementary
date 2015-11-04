@@ -12,10 +12,6 @@ import { Router } from './router'
 // https://mozilla.github.io/nunjucks/api.html#precompile
 // TODO: implement http2?
 
-
-
-
-
 export var Server = {
   // _httpserver
   // _port

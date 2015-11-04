@@ -28,38 +28,44 @@ export class Router {
     this.routes = [];
   }
 
-  /**
-   * group('groupName', (router) => {})
-   * TODO: Implement this type of routing
-   */
-  group(name, callback) {
-
-  }
-
   // Creates a new route
-  route(verb, name, options) {
-    // TODO: Improve route validation
-    if(verb == '' || name == '') { throw new Error("Could not create route."); }
-
-    // let route = new Route(name, options.path, options.action, verb);
-
-    let route = new Route(name, options.path, options.action, verb);
-    if(this.validateRoute(route)) {
-      debug(`added route '${name}'`);
-      this.routes.push(route);
-      return route;
-    }else{
-      throw new Error("Route is Invalid");
+  // TODO: Improve route validation
+  // NOTE: dont create a "new" Route() object for each route
+  // 
+  // Usage:
+  // router.route({options})
+  // router.route('name', {options})
+  route(name, options) {
+    let route = {}
+    if('object' == typeof name && 'undefined' == typeof options) {
+      options = name;
+    } else if('string' == typeof name && 'object' == typeof options) {
+      route.name = name;
     }
 
-    debug(this.routes);
+    Object.assign(route, options);
+
+    debug(route);
+    // if(verb == '' || name == '') { throw new Error("Could not create route."); }
+
+    // // let route = new Route(name, options.path, options.action, verb);
+
+    // let route = new Route(name, options.path, options.action, verb);
+    // if(this.validateRoute(route)) {
+    //   debug(`added route '${name}'`);
+    //   this.routes.push(route);
+    //   return route;
+    // }else{
+    //   throw new Error("Route is Invalid");
+    // }
+
+    // debug(this.routes);
   }
 
   listRoutes() { return this.routes; }
 
   // Validates a route, by checking name and path
-  validateRoute(route) {
-    if(this.findRoute(route.name) || this.findRoute(route.path)) {
+  validateRoute(route) {    if(this.findRoute(route.name) || this.findRoute(route.path)) {
       return false;
     }else{
       return true;

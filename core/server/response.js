@@ -6,7 +6,6 @@ const path = require('path');
 
 import renderTemplate from '../templates'
 
-import { ServerResponse } from 'http'
 export class Response {
   constructor() {
     debug('response');
@@ -24,19 +23,15 @@ export class Response {
   // TODO: Validate the options
   render(name, data) {
     let templatePath = path.resolve(storage.get('admin path'), 'templates');
-    let template = renderTemplate(name, { templatePath, data });
-    this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
-    this._serverResponse.write(template);
-    this.end();
-    // this._serverResponse.wr
-    // let template = renderTemplate(name, data);
-    // if(template) {
-    //   this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
-    //   this._serverResponse.write(template);
-    //   this.end();
-    // }else{
-    //   throw new Error("Template could not be found.");
-    // }
+    renderTemplate(name, { templatePath, data }, (err, template) => {
+      if(err) {
+        throw new Error(err);
+      }else{
+        this._serverResponse.writeHead(200, {'Content-Type': 'text/html'});
+        this._serverResponse.write(template);
+        this.end();
+      }
+    });
   }
 
   // TODO: Add support for different content types
