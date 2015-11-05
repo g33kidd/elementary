@@ -56,37 +56,4 @@ export default {
     }
   }
 
-  // NOTE: Use this for storage instead of adding props to the server?
-  // /**
-  //  * set()
-  //  * sets the object and attaches it to the server
-  //  */
-  // set(type, obj) {
-  //   let allowedTypes = ['router', 'httpserver', 'db'];
-  //   // let objName = obj.constructor.name.toLowerCase();
-  //   let isAllowed = _.find(allowedTypes, (t) => {
-  //     return t === type;
-  //   });
-
-  //   if(isAllowed) {
-  //     debug(`added prop "_${type}"`);
-  //     this[`_${type}`] = obj;
-  //     return;
-  //   }else{
-  //     throw new Error(`Could not attach ${type} to Server`);
-  //   }
-  // },
-
-  // /**
-  //  * get()
-  //  * gets the object from the server
-  //  */
-  // get(type) {
-  //   return this[`_${type}`];
-  //   // if('undefined' != typeof this[`_${type}`]) {
-  //     // return this[`_${type}`];
-  //   // }else{
-  //   //   throw new Error(`${type} does not exist in the environment`);
-  //   // }
-  // },
 }

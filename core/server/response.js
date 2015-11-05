@@ -13,7 +13,6 @@ var Response = {
     let template = renderTemplateSync(name, {templatePath, data});
     this.writeHead(200, {'Content-Type': 'text/html'});
     this.write(template);
-    this.end();
   },
 
   send(status) {
