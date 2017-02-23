@@ -14,7 +14,7 @@ class Response {
 			'Content-Type': 'text/plain'
 		})
 
-		this._response.write(Buffer.from(content, 'utf8'))
+		await this._response.write(Buffer.from(content, 'utf8'))
 		this._response.end()
 	}
 
