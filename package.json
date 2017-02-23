@@ -4,11 +4,12 @@
   "description": "Elementary CMS",
   "main": "server.js",
   "scripts": {
-    "start": "node_modules/nodemon/bin/nodemon.js server.js"
+    "serve:dev": "DEBUG=* node_modules/nodemon/bin/nodemon.js server.js"
   },
   "author": "Joshua Kidd",
   "license": "MIT",
   "dependencies": {
+    "cat-log": "^1.0.2",
     "nodemon": "^1.11.0",
     "socket.io": "^1.7.3"
   }

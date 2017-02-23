@@ -2,8 +2,16 @@
 
 Before you get started contributing. Please read [the contributing guide](https://github.com/g33kidd/cmstest/blob/develop/CONTRIBUTING.md) first.
 
-- Install dependencies `npm install`
-- Start application `npm start`
+- Install dependencies `yarn`
+- Start application `yarn serve:dev`
+
+## Goals and Stuff
+
+My goals for Elementary are as follows:
+
+- To create the easiest CMS for managing content through a web-interface and desktop app.
+- To create a developer-friendly environment for creating plugins, themes and new content.
+- Create a system that is capable enough to manage content, but powerful enough to build a mobile app with real-time in mind.
 
 ## What is this?
 

@@ -23,8 +23,6 @@ class Socket {
 
   async listen() {
     this._io.on('connection', (client) => {
-      console.log(`socket listening on ws://${this._host}:${this._port}`)
-
       client.on('event', console.log)
       client.on('disconnect', console.log)
     })
@@ -43,7 +41,9 @@ class HttpServer {
   async start() {
     this._http = http.createServer(await this.handle.bind(this))
 
-    this._socket.listen()
+    await this._socket.listen()
+    console.log(`socket listening on ws://${this._host}:${this._port}`)
+    
     this._http.listen(this._port, this._host, () => {
       console.log(`Listening on http://${this._host}:${this._port}`)
     })
