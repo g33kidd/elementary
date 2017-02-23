@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="posts">
+        {% for post in posts %}
+          <div class="post">
+            <div class="title">{{post.title}}</div>
+          </div>
+        {% else %}
+          <h1>Sorry, could not find what you're looking for.</h1>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <script></script>
+
+</body>
+</html>

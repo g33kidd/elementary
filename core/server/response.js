@@ -1,5 +1,8 @@
 'use strict';
 
+const path = require('path')
+const renderTemplate = require('../templates/').renderTemplate
+
 class Response {
 	constructor (res) {
 		this._response = res
@@ -12,6 +15,19 @@ class Response {
 		})
 
 		this._response.write(Buffer.from(content, 'utf8'))
+		this._response.end()
+	}
+
+	async sendTemplate(namespace, opts = {}) {
+		const tplLocation = path.join(__dirname, '../../content/themes/default')
+		const content = await renderTemplate(`${tplLocation}/${namespace}`, opts)
+
+		this._response.writeHead(200, {
+			'Content-Length': Buffer.byteLength(content),
+			'Content-Type': 'text/html'
+		})
+
+		await this._response.write(Buffer.from(content, 'utf8'))
 		this._response.end()
 	}
 }
