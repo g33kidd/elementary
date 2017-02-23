@@ -9,6 +9,8 @@ const Response = require('./response')
 
 class HttpServer {
   constructor (host, port) {
+    this._httpServer = null
+
     // Setup the middleware
     this._httpMiddleware = []
 
@@ -16,7 +18,13 @@ class HttpServer {
     this._httpPort = port
     this._httpHost = host
 
+    // Easy access to the URL to access the application
     this._httpURI = `http://${host}:${port}`
+  }
+
+  async restart() {
+    await this._httpServer.close()
+    await this.start()
   }
 
   async start () {
@@ -30,14 +38,11 @@ class HttpServer {
     const request = new Request(req)
     const response = new Response(res)
 
-    // console.log(req)
-    // console.log(request)
+    for (let middleware of this._httpMiddleware) {
+      await middleware.handle(request, response)
+    }
 
     await response.sendTemplate('index')
-    // await response.send("hello world!")
-    // for (let middleware of this._httpMiddleware) {
-    //   await middleware.handle(request, response)
-    // }
   }
 }
 

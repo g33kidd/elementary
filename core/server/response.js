@@ -18,6 +18,10 @@ class Response {
 		this._response.end()
 	}
 
+	async status(code) {
+		this._response.statusCode = code
+	}
+
 	async sendTemplate(namespace, opts = {}) {
 		const tplLocation = path.join(__dirname, '../../content/themes/default')
 		const content = await renderTemplate(`${tplLocation}/${namespace}`, opts)

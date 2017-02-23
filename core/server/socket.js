@@ -14,16 +14,17 @@ class SocketServer {
 		this.io = new uWebSocket({ port: 3001, perMessageDeflate: false })
 		this.io.on('connection', (ws) => {
 			ws.on('message', console.log)
-			ws.send('something')
-		})
-		// this.io = await Socket(httpServer._httpServer)
-		// this.io.ws = new uWebSocket({ noServer: true, perMessageDeflate: false })
-		// this.io.sockets.on('connection', (socket) => {
-		// 	console.log(socket)
-		// 	socket.emit('an event', { some: 'data' });
-		// })
+			// ws.send('something')
+			// ws.send('blah blah blah')
+			// ws.send({ some: "Data", nerd: true, g33k: true })
 
-		console.log(this.io)
+			// Just for testing really...
+			setInterval(() => {
+				ws.send('ping')
+			}, 5000)
+		})
+
+		// console.log(this.io)
 		// this.io.ws = new uWebSocket()
 
 		// const server = httpServer._httpServer
