@@ -4,7 +4,7 @@
   "description": "Elementary CMS",
   "main": "server.js",
   "scripts": {
-    "serve:dev": "DEBUG=* node_modules/nodemon/bin/nodemon.js server.js"
+    "serve:dev": "node_modules/nodemon/bin/nodemon.js server.js"
   },
   "author": "Joshua Kidd",
   "license": "MIT",

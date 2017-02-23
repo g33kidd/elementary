@@ -1,64 +1,73 @@
 'use strict'
 
-const http = require('http')
-const io = require('socket.io')
+const server = require('./core/server')
+server.start()
 
-// Constructs a base Response helper class
-class Response {
-  constructor(res) {
-    this._response = res
-  }
+// 'use strict'
 
-  async send(content) {
-    this._response.writeHead(200, {'Content-Type': 'text/html'})
-    this._response.end('ok')
-  }
-}
+// const http = require('http')
+// const io = require('socket.io')
+// const Cat = require('cat-log')
 
-// Socket server implementation
-class Socket {
-  constructor(server) {
-    this._io = io(server)
-  }
+// const httplog = new Cat('elementary:http')
+// const socketlog = new Cat('elementary:socket')
 
-  async listen() {
-    this._io.on('connection', (client) => {
-      client.on('event', console.log)
-      client.on('disconnect', console.log)
-    })
-  }
-}
+// // Constructs a base Response helper class
+// class Response {
+//   constructor(res) {
+//     this._response = res
+//   }
 
-// The HttpServer class for handling Http Request
-class HttpServer {
-  constructor(host = 'localhost', port = 3000) {
-    this._socket = new Socket(this._http)
+//   async send(content) {
+//     this._response.writeHead(200, {'Content-Type': 'text/html'})
+//     this._response.end('ok')
+//   }
+// }
+
+// // Socket server implementation
+// class Socket {
+//   constructor(server) {
+//     this._io = io(server)
+//   }
+
+//   async listen() {
+//     this._io.on('connection', (client) => {
+//       client.on('event', console.log)
+//       client.on('disconnect', console.log)
+//     })
+//   }
+// }
+
+// // The HttpServer class for handling Http Request
+// class HttpServer {
+//   constructor(host = 'localhost', port = 3000) {
+//     this._socket = new Socket(this._http)
     
-    this._port = port
-    this._host = host
-  }
+//     this._port = port
+//     this._host = host
+//   }
 
-  async start() {
-    this._http = http.createServer(await this.handle.bind(this))
+//   async start() {
+//     this._http = http.createServer(await this.handle.bind(this))
 
-    await this._socket.listen()
-    console.log(`socket listening on ws://${this._host}:${this._port}`)
-    
-    this._http.listen(this._port, this._host, () => {
-      console.log(`Listening on http://${this._host}:${this._port}`)
-    })
-  }
+//     await this._socket.listen()
+//     socketlog.info(`listening on ws://${this._host}:${this._port}`)
 
-  async handle(req, res) {
-    try {
-      const response = new Response(res)
-      await response.send("Hello world!")
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
+//     this._http.listen(this._port, this._host, () => {
+//       httplog.info(`listening on http://${this._host}:${this._port}`)
+//     })
+//   }
 
-// const socketServer = new Socket('localhost', '3000')
-const httpServer = new HttpServer('localhost', '3000')
-httpServer.start()
+//   async handle(req, res) {
+//     try {
+//       const response = new Response(res)
+//       await response.send("Hello world!")
+//     } catch (err) {
+//       console.log(err)
+//     }
+//   }
+// }
+
+// // const socketServer = new Socket('localhost', '3000')
+// const httpServer = new HttpServer('localhost', '3000')
+// httpServer.start()

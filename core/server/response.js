@@ -1,23 +1,40 @@
 'use strict';
 
-const debug = require('debug')('cms:response');
-const storage = require('../storage');
-const path = require('path');
+class Response {
+	constructor (res) {
+		this._response = res
+	}
 
-import { renderTemplateSync, renderTemplate } from '../templates'
+	async send(content) {
+		this._response.writeHead(200, {
+			'Content-Length': Buffer.byteLength(content),
+			'Content-Type': 'text/plain'
+		})
 
-// Object.assign(res, Response);
-var Response = {
-  render(name, data) {
-    let templatePath = path.resolve(storage.get('admin path'), 'templates');
-    let template = renderTemplateSync(name, {templatePath, data});
-    this.writeHead(200, {'Content-Type': 'text/html'});
-    this.write(template);
-  },
+		this._response.write(Buffer.from(content, 'utf8'))
+		this._response.end()
+	}
+}
 
-  send(status) {
-    this.statusCode = status;
-  }
-};
+module.exports = Response
+// const debug = require('debug')('cms:response');
+// const storage = require('../storage');
+// const path = require('path');
 
-export default { Response };
+// import { renderTemplateSync, renderTemplate } from '../templates'
+
+// // Object.assign(res, Response);
+// var Response = {
+//   render(name, data) {
+//     let templatePath = path.resolve(storage.get('admin path'), 'templates');
+//     let template = renderTemplateSync(name, {templatePath, data});
+//     this.writeHead(200, {'Content-Type': 'text/html'});
+//     this.write(template);
+//   },
+
+//   send(status) {
+//     this.statusCode = status;
+//   }
+// };
+
+// export default { Response };
