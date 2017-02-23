@@ -30,6 +30,9 @@ class HttpServer {
     const request = new Request(req)
     const response = new Response(res)
 
+    // console.log(req)
+    // console.log(request)
+
     await response.sendTemplate('index')
     // await response.send("hello world!")
     // for (let middleware of this._httpMiddleware) {

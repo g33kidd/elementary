@@ -1,22 +1,28 @@
 'use strict'
 
-const Socket = require('socket.io')
+// const Socket = require('socket.io')
 const uWebSocket = require('uws').Server
 const Cat = require('cat-log')
 const log = new Cat('elementary:websocket')
 
 class SocketServer {
 	constructor () {
-		this._httpServer = null
 		this.io = null
 	}
 
-	async attach(httpServer) {
-		this.io = await Socket.listen(httpServer._httpServer, { wsEngine: 'uws' })
-		this.io.sockets.on('connection', (socket) => {
-			console.log(socket)
-			socket.emit('an event', { some: 'data' });
+	async start(http) {
+		this.io = new uWebSocket({ port: 3001, perMessageDeflate: false })
+		this.io.on('connection', (ws) => {
+			ws.on('message', console.log)
+			ws.send('something')
 		})
+		// this.io = await Socket(httpServer._httpServer)
+		// this.io.ws = new uWebSocket({ noServer: true, perMessageDeflate: false })
+		// this.io.sockets.on('connection', (socket) => {
+		// 	console.log(socket)
+		// 	socket.emit('an event', { some: 'data' });
+		// })
+
 		console.log(this.io)
 		// this.io.ws = new uWebSocket()
 

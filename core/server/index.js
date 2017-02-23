@@ -11,6 +11,6 @@ Server.start = async function() {
   const http = new HttpServer('localhost', 3000)
   const socket = new SocketServer()
 
-  await socket.attach(http)
-  http.start()
+  await socket.start(http)
+  await http.start()
 }

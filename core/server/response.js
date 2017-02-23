@@ -22,6 +22,8 @@ class Response {
 		const tplLocation = path.join(__dirname, '../../content/themes/default')
 		const content = await renderTemplate(`${tplLocation}/${namespace}`, opts)
 
+		// console.log(content)
+
 		this._response.writeHead(200, {
 			'Content-Length': Buffer.byteLength(content),
 			'Content-Type': 'text/html'
