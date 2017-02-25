@@ -9,6 +9,7 @@
   "author": "Joshua Kidd",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.1.5",
     "cat-log": "^1.0.2",
     "node-persist": "^2.0.8",
     "nodemon": "^1.11.0",

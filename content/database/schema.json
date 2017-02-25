@@ -1,0 +1,15 @@
+{
+  "posts": {
+    "title": {
+      "type": "string"
+    }
+  },
+
+  "components": {
+    
+  },
+
+  "options": {}
+
+
+}

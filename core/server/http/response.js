@@ -15,11 +15,14 @@ class Response {
 		})
 
 		await this._response.write(Buffer.from(content, 'utf8'))
-		this._response.end()
 	}
 
 	async status(code) {
 		this._response.statusCode = code
+	}
+
+	async final () {
+		this._response.end()
 	}
 
 	async sendTemplate(namespace, opts = {}) {
