@@ -6,13 +6,13 @@ const Cat = require('cat-log')
 
 const log = new Cat('elementary:http')
 
-const Request = require('./request')
-const Response = require('./response')
+const Request = require('server/http/request')
+const Response = require('server/http/response')
 
 class HttpServer {
 
   constructor (host, port) {
-    this._httpServer = null
+    this._server = null
 
     this._asyncMiddleware = []
     this._syncMiddleware = []
@@ -34,31 +34,44 @@ class HttpServer {
    * middlewares will be handled.
    */
   async push (middleware, sync = true) {
-
+    if(sync) {
+      this._syncMiddleware.push(middleware)
+    } else {
+      this._asyncMiddleware.push(middleware)
+    }
   }
 
   async start () {
-
+    this._server = http.createServer(await this.handle.bind(this))
+    this._server.listen(this._port, this._host, () => {
+      log.info(`listening on http://${this._host}:${this._port}`)
+    })
   }
 
   async handle (req, res) {
-    await handleAsyncMiddlewares(req, res)
-    await handleSyncMiddlewares(req, res)
+    const request = new Request(req)
+    const response = new Response(res)
+
+    await this.handleAsyncMiddleware(request, response)
+    await this.handleSyncMiddleware(request, response)
 
     await response.final()
   }
 
-  async handleAsyncMiddlewares (req, res) {
+  // This needs to handle middleware in parallel
+  async handleAsyncMiddleware (req, res) {
     await ASync.each(this._asyncMiddleware, (middleware, cb) => {
-      middleware.handle(req, res)
+      middleware(req, res)
       cb()
-    }, console.log)
+    })
   }
 
   async handleSyncMiddleware (req, res) {
     await this._syncMiddleware.forEach(async function (middleware) {
-      await middleware.handle(req, res)
+      await middleware(req, res)
     })
   }
 
 }
+
+module.exports = HttpServer

@@ -2,7 +2,10 @@
 
 class Request {
 	constructor (req) {
-		this._request = req
+		this._message = req
+
+		this.url = req.url
+		this.headers = req.url
 	}
 
 	async set(key, val) {

@@ -1,7 +1,10 @@
 'use strict';
 
 const path = require('path')
-const renderTemplate = require('../templates/').renderTemplate
+const renderTemplate = require('../../templates/').renderTemplate
+
+const Cat = require('cat-log')
+const log = new Cat('elementary:template')
 
 class Response {
 	constructor (res) {
@@ -26,9 +29,10 @@ class Response {
 	}
 
 	async sendTemplate(namespace, opts = {}) {
-		const tplLocation = path.join(__dirname, '../../content/themes/default')
+		const tplLocation = path.join(__dirname, '../../../content/themes/default')
 		const content = await renderTemplate(`${tplLocation}/${namespace}`, opts)
 
+		log.info(`rendering ${namespace}.njk at ${tplLocation}`)
 		// console.log(content)
 
 		this._response.writeHead(200, {

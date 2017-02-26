@@ -4,7 +4,7 @@
   "description": "Elementary CMS",
   "main": "server.js",
   "scripts": {
-    "serve:dev": "node_modules/nodemon/bin/nodemon.js server.js"
+    "serve:dev": "NODE_PATH=./core NODE_ENV=development node_modules/nodemon/bin/nodemon.js server.js"
   },
   "author": "Joshua Kidd",
   "license": "MIT",
