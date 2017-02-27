@@ -3,11 +3,36 @@
 const Cat = require('cat-log')
 const log = new Cat('elementary')
 
-const storage = require('./storage')
-const server = require('./server')
+const Server = require('server')
 
-// Function to start the Server and bootstrap everything.
-module.exports = async function(opts) {
-  await server.start()
-  log.info(`application running...`)
+class Core {
+  constructor (config) {
+    log.info(`starting core...`)
+
+    this.config = Object.assign({}, config)
+    this.server = null
+  }
+
+  async bootstrap (bootstrapper) {
+    await bootstrapper(this)
+  }
+
+  async configurePaths (paths = {}) {
+    this.config.paths = paths
+  }
+
+  async configureHttpMiddleware (extras = []) {
+
+  }
+
+  async configureWsMiddleware (extras = []) {
+
+  }
+
+  async start (opts = {}) {
+    this.server = new Server(this)
+    await this.server.start()
+  }
 }
+
+module.exports = Core

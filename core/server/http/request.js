@@ -1,10 +1,13 @@
 'use strict'
 
+const url = require('url')
+
 class Request {
 	constructor (req) {
 		this._message = req
 
 		this.url = req.url
+		this.path = url.parse(req.url)
 		this.headers = req.url
 	}
 

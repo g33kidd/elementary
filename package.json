@@ -4,13 +4,14 @@
   "description": "Elementary CMS",
   "main": "server.js",
   "scripts": {
-    "serve:dev": "NODE_PATH=./core NODE_ENV=development node_modules/nodemon/bin/nodemon.js server.js"
+    "serve:dev": "NODE_PATH=./core:./content NODE_ENV=development node_modules/nodemon/bin/nodemon.js server.js"
   },
   "author": "Joshua Kidd",
   "license": "MIT",
   "dependencies": {
     "async": "^2.1.5",
     "cat-log": "^1.0.2",
+    "lowdb": "^0.15.5",
     "node-persist": "^2.0.8",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",

@@ -60,15 +60,20 @@ class HttpServer {
 
   // This needs to handle middleware in parallel
   async handleAsyncMiddleware (req, res) {
-    await ASync.each(this._asyncMiddleware, (middleware, cb) => {
-      middleware(req, res)
-      cb()
+    await ASync.each(this._asyncMiddleware, (middleware, callback) => {
+      (typeof middleware.handle !== 'undefined')
+        ? middleware.handle(req, res)
+        : middleware(req, res)
+
+      callback()
     })
   }
 
   async handleSyncMiddleware (req, res) {
     await this._syncMiddleware.forEach(async function (middleware) {
-      await middleware(req, res)
+      (typeof middleware.handle !== 'undefined')
+        ? await middleware.handle(req, res)
+        : await middleware(req, res)
     })
   }
 
